@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SDS Electronics</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      background:#040b1c;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      width:700px;
+      height:700px;
+      background:rgba(0,140,255,0.18);
+      top:-250px;
+      left:-250px;
+      filter:blur(150px);
+      z-index:-1;
+    }
+
+    body::after{
+      content:'';
+      position:fixed;
+      width:600px;
+      height:600px;
+      background:rgba(0,255,255,0.12);
+      bottom:-250px;
+      right:-250px;
+      filter:blur(150px);
+      z-index:-1;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      width:100%;
+      position:fixed;
+      top:0;
+      z-index:1000;
+      padding:20px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(255,255,255,0.04);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(0,217,255,0.15);
+    }
+
+    .logo{
+      font-size:32px;
+      font-weight:700;
+      color:#00d9ff;
+      text-shadow:0 0 15px #00d9ff;
+    }
+
+    nav ul{
+      display:flex;
+      gap:30px;
+      list-style:none;
+    }
+
+    nav ul li a{
+      color:white;
+      text-decoration:none;
+      transition:0.3s;
+    }
+
+    nav ul li a:hover{
+      color:#00d9ff;
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:120px 8%;
+      position:relative;
+    }
+
+    .hero-content{
+      max-width:1000px;
+    }
+
+    .hero-sub{
+      color:#7cf7ff;
+      letter-spacing:5px;
+      margin-bottom:20px;
+      text-transform:uppercase;
+      text-shadow:0 0 15px #00d9ff;
+    }
+
+    .hero h1{
+      font-size:72px;
+      line-height:1.2;
+      margin-bottom:25px;
+      background:linear-gradient(to right,#00d9ff,#7cf7ff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      color:#bfd2e2;
+      font-size:18px;
+      line-height:1.8;
+      margin-bottom:40px;
+    }
+
+    .btn{
+      padding:16px 38px;
+      border:none;
+      border-radius:50px;
+      background:linear-gradient(90deg,#00d9ff,#0066ff);
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.4s;
+      box-shadow:0 0 25px rgba(0,217,255,0.45);
+    }
+
+    .btn:hover{
+      transform:translateY(-5px);
+      box-shadow:0 0 35px rgba(0,217,255,0.8);
+    }
+
+    /* COMMON */
+
+    section{
+      padding:100px 8%;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:70px;
+    }
+
+    .section-title h2{
+      font-size:42px;
+      margin-bottom:15px;
+      color:#00d9ff;
+      text-shadow:0 0 10px #00d9ff;
+    }
+
+    .section-title p{
+      color:#b5c9db;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    /* CARDS */
+
+    .card{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(0,217,255,0.12);
+      border-radius:25px;
+      padding:35px;
+      backdrop-filter:blur(15px);
+      transition:0.4s;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .card::before{
+      content:'';
+      position:absolute;
+      width:120px;
+      height:120px;
+      background:rgba(0,217,255,0.12);
+      border-radius:50%;
+      top:-40px;
+      right:-40px;
+      filter:blur(30px);
+    }
+
+    .card:hover{
+      transform:translateY(-10px);
+      border-color:#00d9ff;
+      box-shadow:0 0 30px rgba(0,217,255,0.25);
+    }
+
+    .card h3{
+      color:#00d9ff;
+      margin-bottom:15px;
+      font-size:24px;
+    }
+
+    .card p{
+      color:#d2dfea;
+      line-height:1.7;
+    }
+
+    /* GALLERY */
+
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:25px;
+    }
+
+    .gallery-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:25px;
+      min-height:300px;
+      border:1px solid rgba(0,217,255,0.12);
+      transition:0.4s;
+    }
+
+    .gallery-card.large{
+      grid-column:span 2;
+    }
+
+    .gallery-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:0.5s;
+    }
+
+    .gallery-card:hover img{
+      transform:scale(1.1);
+    }
+
+    .gallery-card:hover{
+      box-shadow:0 0 35px rgba(0,217,255,0.3);
+      border-color:#00d9ff;
+    }
+
+    .overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.85),
+        rgba(0,0,0,0.1)
+      );
+      display:flex;
+      align-items:flex-end;
+      padding:25px;
+    }
+
+    .overlay h3{
+      color:#00d9ff;
+      font-size:28px;
+      text-shadow:0 0 10px #00d9ff;
+    }
+
+    /* INDUSTRIES */
+
+    .industries{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:20px;
+    }
+
+    .industry{
+      padding:15px 30px;
+      border-radius:50px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(0,217,255,0.18);
+      color:#00d9ff;
+      transition:0.3s;
+    }
+
+    .industry:hover{
+      background:#00d9ff;
+      color:#04111d;
+      transform:scale(1.05);
+    }
+
+    /* CONTACT */
+
+    .contact-form{
+      max-width:700px;
+      margin:auto;
+    }
+
+    .contact-form form{
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea{
+      padding:18px;
+      border-radius:15px;
+      border:1px solid rgba(0,217,255,0.12);
+      background:rgba(255,255,255,0.04);
+      color:white;
+      outline:none;
+      font-size:16px;
+    }
+
+    .contact-form textarea{
+      min-height:150px;
+      resize:none;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus{
+      border-color:#00d9ff;
+      box-shadow:0 0 15px rgba(0,217,255,0.25);
+    }
+
+    footer{
+      padding:30px;
+      text-align:center;
+      color:#9ebcd3;
+      border-top:1px solid rgba(0,217,255,0.12);
+      background:rgba(255,255,255,0.03);
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
+      nav ul{
+        display:none;
+      }
+
+      .hero h1{
+        font-size:42px;
+      }
+
+      .section-title h2{
+        font-size:32px;
+      }
+
+      .gallery-card.large{
+        grid-column:span 1;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+
+    <div class="logo">
+      SDS Electronics
+    </div>
+
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#industries">Industries</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="hero-sub">
+        FUTURE OF NAVY ELECTRONICS
+      </div>
+
+      <h1>
+        AI Powered Smart Monitoring Solutions
+      </h1>
+
+      <p>
+        SDS Electronics specializes in Navy electronic repairs,
+        AI surveillance systems, smart monitoring infrastructure,
+        marine communication technologies, and futuristic security solutions.
+      </p>
+
+      <button class="btn">
+        Explore Technology
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section id="about">
+
+    <div class="section-title">
+
+      <h2>About SDS Electronics</h2>
+
+      <p>
+        Premium AI monitoring and Navy electronics service provider.
+      </p>
+
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+
+        <h3>AI Innovation</h3>
+
+        <p>
+          Advanced AI technologies for smart monitoring,
+          intelligent surveillance, and real-time analytics.
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <h3>Navy Electronics</h3>
+
+        <p>
+          Specialized repair and maintenance services for naval electronics,
+          marine communication systems, and defense monitoring units.
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <h3>Future Security</h3>
+
+        <p>
+          Futuristic smart security infrastructure with cloud connectivity,
+          AI dashboards, and live monitoring systems.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FEATURES -->
+
+  <section id="features">
+
+    <div class="section-title">
+
+      <h2>Advanced AI Features</h2>
+
+      <p>
+        Intelligent smart monitoring ecosystem powered by SDS Electronics.
+      </p>
+
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>AI Monitoring</h3>
+        <p>Real-time AI surveillance with automated activity detection.</p>
+      </div>
+
+      <div class="card">
+        <h3>Smart Security</h3>
+        <p>Advanced smart security systems with automated alerts.</p>
+      </div>
+
+      <div class="card">
+        <h3>Temperature Scanning</h3>
+        <p>Thermal analytics and abnormal heat detection technology.</p>
+      </div>
+
+      <div class="card">
+        <h3>People Counting</h3>
+        <p>AI occupancy analytics and crowd management systems.</p>
+      </div>
+
+      <div class="card">
+        <h3>Voice Alert System</h3>
+        <p>Automated AI voice announcements and warning systems.</p>
+      </div>
+
+      <div class="card">
+        <h3>Cloud Dashboard</h3>
+        <p>Centralized futuristic AI monitoring dashboard infrastructure.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- GALLERY -->
+
+  <section id="gallery">
+
+    <div class="section-title">
+
+      <h2>Our Operations & Technology</h2>
+
+      <p>
+        Navy electronics, AI monitoring systems, and futuristic smart infrastructure.
+      </p>
+
+    </div>
+
+    <div class="gallery-grid">
+
+      <div class="gallery-card large">
+
+        <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?q=80&w=1600&auto=format&fit=crop">
+
+        <div class="overlay">
+          <h3>Marine Electronics</h3>
+        </div>
+
+      </div>
+
+      <div class="gallery-card">
+
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="overlay">
+          <h3>Repair Lab</h3>
+        </div>
+
+      </div>
+
+      <div class="gallery-card">
+
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="overlay">
+          <h3>AI Dashboard</h3>
+        </div>
+
+      </div>
+
+      <div class="gallery-card">
+
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="overlay">
+          <h3>Central Operations</h3>
+        </div>
+
+      </div>
+
+      <div class="gallery-card large">
+
+        <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1600&auto=format&fit=crop">
+
+        <div class="overlay">
+          <h3>Defense Surveillance</h3>
+        </div>
+
+      </div>
+
+      <div class="gallery-card">
+
+        <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="overlay">
+          <h3>AI Systems</h3>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- INDUSTRIES -->
+
+  <section id="industries">
+
+    <div class="section-title">
+
+      <h2>Industries Served</h2>
+
+      <p>
+        Trusted monitoring solutions across defense and industrial sectors.
+      </p>
+
+    </div>
+
+    <div class="industries">
+
+      <div class="industry">Naval Defense</div>
+      <div class="industry">Marine Operations</div>
+      <div class="industry">Corporate Offices</div>
+      <div class="industry">Smart Buildings</div>
+      <div class="industry">Manufacturing</div>
+      <div class="industry">Government Facilities</div>
+      <div class="industry">Warehouses</div>
+      <div class="industry">Healthcare</div>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section id="contact">
+
+    <div class="section-title">
+
+      <h2>Contact Us</h2>
+
+      <p>
+        Let's build the future of AI monitoring together.
+      </p>
+
+    </div>
+
+    <div class="contact-form">
+
+      <form>
+
+        <input type="text" placeholder="Your Name" required>
+
+        <input type="email" placeholder="Your Email" required>
+
+        <input type="text" placeholder="Company Name">
+
+        <textarea placeholder="Tell us about your project"></textarea>
+
+        <button class="btn">
+          Send Message
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    © 2026 SDS Electronics • AI Smart Monitoring & Navy Electronics Services
+  </footer>
+
+</body>
+
+  </html>
